@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="api.js" defer></script>
+    <script type="module" src="ui.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</head>
+
+<body>
+    <header class="flex justify-between p-10 items-centre">
+        <div class="flex items-centre">
+            <div>
+                <p class="p-2 px-4 bg-blue-600 text-white rounded-lg">F</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg">FlowBoard</h3>
+                <p class="text-sm text-gray-500">Suivi des tâches de l'équipe</p>
+            </div>
+        </div>
+        <button class="btn" onclick="my_modal_1.showModal()">+Nouvelle card</button>
+        <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+                <h3 class="text-lg font-bold">Création d'une nouveau CARD : </h3>
+                <div class="grid">
+                    <label for="title">Title : </label>
+                    <input type="text" id="title_input_ajout" name="title" placeholder="Entre votre title"
+                        class="p-3 rounded-xl">
+                    <span id="alert-title" class="text-xs text-[red] hidden">input invaliiid</span>
+                    <label for="Description">Description : </label>
+                    <input type="text" name="Description" id="description_input_ajout"
+                        placeholder="Entre votre Description " class="p-3 rounded-xl">
+                    <span id="alert-description" class="text-xs text-[red] hidden">input invaliiid</span>
+                    <label for="payment">Priority : &nbsp;</label>
+                    <select name="payment" id="priority_input_ajout" class="p-3 rounded-xl">
+                        <option value="high">high</option>
+                        <option value="medium">medium</option>
+                        <option value="low">low</option>
+                    </select>
+                    <label for="nom">Name : </label>
+                    <select type="text" id="assigne_input_ajout" name="nom" class="p-3 rounded-xl">
+                        <option value="Amina Haddad">Amina Haddad</option>
+                        <option value="Yasmine Benali">Yasmine Benali</option>
+                        <option value="Thomas Leroy">Thomas Leroy</option>
+                        <option value="Lucas Martin">Lucas Martin</option>
+                        <option value="Inès Moreau">Inès Moreau</option>
+                    </select>
+                    <label for="Status">Status : </label>
+                    <select type="text" id="status_input_ajout" name="Status" class="p-3 rounded-xl">
+                        <option value="todo">À faire</option>
+                        <option value="in-progress">In progress</option>
+                        <option value="done">Done</option>
+                    </select>
+
+                </div>
+                <button id="btn-submit" class="btn">submit</button>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    </header>
+    <div class="flex gap-5 p-6">
+        <div class="grid">
+            <label for="recherche">Recherche : </label>
+            <input type="text" id="recherche" name="recherche" class="p-1 rounded-sm" placeholder="ex:(tache 1)">
+        </div>
+        <div class="grid">
+            <label for="Priorité">Priorité : </label>
+            <select id="payment-" value="" name="payment" class="p-1 rounded-sm">
+                <option value="">Toutes</option>
+                <option>high</option>
+                <option>medium</option>
+                <option>low</option>
+            </select>
+        </div>
+        <div class="grid">
+            <label for="Assigné">Assigné : </label>
+            <select type="text" id="assignee_delta" value="" name="Assigné" class="p-1 rounded-sm">
+                <option value="">Toutes</option>
+                <option>Amina Haddad</option>
+                <option>Yasmine Benali</option>
+                <option>Thomas Leroy</option>
+                <option>Lucas Martin</option>
+                <option>Inès Moreau</option>
+            </select>
+        </div>
+        <button id="renitialiser" class="btn mt-10">Réinitialiser</button>
+    </div>
+    <div class="hidden" id="erorrr">
+        <div role="alert" class="alert alert-error">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Error! Task failed successfully.</span>
+            <button class="btn" id="actualiser">Actualiser</button>
+        </div>
+    </div>
+    <main id="main" class="grid grid-cols-3">
+        <section class=" flex flex-col m-5 p-6 gap-5 bg-[grey] rounded-xl">
+            <div class="text-[white]">À faire</div>
+            <div id="a-faire">
+                <!-- <div class="flex flex-col gap-5 bg-[white] p-6 rounded-lg"><div><h3 class="font-serif">Filtres combinables</h3><p class="text-[grey] text-xs">Requête avec URLSearchParams à chaque .changement.</p></div><div class="flex justify-between items-centre"><p class="bg-[red] text-[white] p-1 text-xs rounded-sm  font-mono">Haute</p><p class="text-[blue] text-xs font-sans p-1">Omar</p></div></div> -->
+            </div>
+        </section>
+        <section class=" flex flex-col m-5 p-6 gap-5 bg-[grey] rounded-xl">
+            <div class="text-[white]">In progress</div>
+            <div id="in-progre">
+                <!-- <div class="flex flex-col gap-5 bg-[white] p-6 rounded-lg">
+                <div>
+                    <h3 class="font-serif">Filtres combinables</h3>
+                    <p class="text-[grey] text-xs">Requête avec URLSearchParams à chaque
+                        changement.</p>
+                </div>
+                <div class="flex justify-between items-centre">
+                    <p class="bg-[red] text-[white] p-1 text-xs rounded-sm  font-mono">Haute</p>
+                    <p class="text-[blue] text-xs font-sans p-1">Omar</p>
+                </div>
+            </div> -->
+            </div>
+        </section>
+        <section class=" flex flex-col m-5 p-6 gap-5 bg-[grey] rounded-xl">
+            <div class="text-[white]">Done</div>
+            <div id="done">
+                <!-- <div class="flex flex-col gap-5 bg-[white] p-6 rounded-lg">
+                <div>
+                    <h3 class="font-serif">Filtres combinables</h3>
+                    <p class="text-[grey] text-xs">Requête avec URLSearchParams à chaque
+                        changement.</p>
+                </div>
+                <div class="flex justify-between items-centre">
+                    <p class="bg-[red] text-[white] p-1 text-xs rounded-sm  font-mono">Haute</p>
+                    <p class="text-[blue] text-xs font-sans p-1">Omar</p>
+                </div>
+            </div> -->
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
