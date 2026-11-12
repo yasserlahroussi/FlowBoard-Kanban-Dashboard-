@@ -67,4 +67,40 @@ function eror() {
 }
 actualisation.addEventListener('click', () => {
     loaddata(afficher_les_cartes, eror)
+
 })
+
+
+// 3: filtre et recherche :
+
+
+const assigne_delta = document.getElementById("assignee_delta")
+document.getElementById('assignee_delta').addEventListener('change', (e) => {
+    let value_assigne = e.currentTarget.value
+    console.log(value_assigne)
+    assigne_delta.value
+    loaddata(afficher_les_cartes, eror, "", value_assigne, "")
+})
+
+
+const filtre = document.getElementById("payment-")
+// const assigne = document.getElementById("assignee")
+document.getElementById('recherche').addEventListener('input', function () {
+    let value_holder = document.getElementById('recherche').value.trim();
+    const filtre_input = filtre.value
+    const value_assigne = assigne_delta.value
+    // const assigne_input = assigne.value
+    loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
+
+})
+
+filtre.addEventListener('change', (e) => {
+    let value_holder = document.getElementById('recherche').value.trim();
+    const filtre_input = e.currentTarget.value
+    const value_assigne = assigne_delta.value
+    // const assigne_input = assigne.value
+    loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
+
+})
+
+
