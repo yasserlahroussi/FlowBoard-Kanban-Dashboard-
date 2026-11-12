@@ -67,6 +67,7 @@ function eror() {
 }
 actualisation.addEventListener('click', () => {
     loaddata(afficher_les_cartes, eror)
+
 })
 
 
@@ -101,4 +102,5 @@ filtre.addEventListener('change', (e) => {
     loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
 
 })
+
 
