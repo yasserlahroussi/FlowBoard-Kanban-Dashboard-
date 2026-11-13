@@ -77,9 +77,11 @@ actualisation.addEventListener('click', () => {
 const assigne_delta = document.getElementById("assignee_delta")
 document.getElementById('assignee_delta').addEventListener('change', (e) => {
     let value_assigne = e.currentTarget.value
+        let value_holder = document.getElementById('recherche').value.trim();
+    const filtre_input = filtre.value
     console.log(value_assigne)
     assigne_delta.value
-    loaddata(afficher_les_cartes, eror, "", value_assigne, "")
+    loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
 })
 
 
