@@ -1,4 +1,4 @@
-import { loaddata } from './api.js'
+import { get_card, loaddata } from './api.js'
 loaddata(afficher_les_cartes, eror)
 
 //1 : ajoute des cartes
@@ -35,6 +35,25 @@ function ajoute_selon_status(CARD, i, parent) {
     const description = document.createElement("p")
     description.classList = "text-[grey] text-xs"
     const priority = document.createElement("p")
+    const btn_modifi = document.createElement("button")
+    btn_modifi.textContent="modify"
+    btn_modifi.className="modify"
+     btn_modifi.classList.add("btn")
+     btn_modifi.setAttribute("data-id",CARD[i].id)
+     console.log(CARD)
+     btn_modifi.addEventListener('click',async (e)=>{
+        console.log(e.currentTarget.dataset.id)
+        let {data} = await get_card(e.currentTarget.dataset.id)
+        
+        my_modal_1.showModal()
+        my_modal_1.querySelector('[name="title"]').value=data.title
+        my_modal_1.querySelector('[name="Description"]').value=data.description
+        my_modal_1.querySelector('[name="payment"]').value=data.priority
+        my_modal_1.querySelector('[name="nom"]').value=data.assignee
+        my_modal_1.querySelector('[name="Status"]').value=data.status
+        my_modal_1.querySelector('[name="idd"]').value=data.id
+   
+     })
     priority.textContent = CARD[i].priority
     priority.classList = "bg-[red] text-[white] p-1 text-xs rounded-sm  font-mono"
     if (priority.textContent == "medium") {
@@ -53,7 +72,8 @@ function ajoute_selon_status(CARD, i, parent) {
     name.textContent = CARD[i].assignee
     div1.append(h3, description)
     div2.append(priority, name)
-    div_parent.append(div1, div2)
+    div_parent.append(div1, div2,btn_modifi)
+    
     parent.append(div_parent)
 }
 
@@ -69,7 +89,6 @@ actualisation.addEventListener('click', () => {
     loaddata(afficher_les_cartes, eror)
 
 })
-
 
 // 3: filtre et recherche :
 
@@ -168,4 +187,7 @@ btn_init.addEventListener('click',(e)=>{
     filtre.value=""
     loaddata(afficher_les_cartes, eror, filtre.value, assigne_delta.value, rechercherrr.value)
 })
+
+
+
 
