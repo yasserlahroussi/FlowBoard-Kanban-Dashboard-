@@ -55,3 +55,25 @@ export async function modify_card(id, data) {
         console.error(error)
     }
 }
+export async function change_status(status, id) {
+    const options = {
+        method: 'PATCH',
+        url: 'https://flowboard-api-virid.vercel.app/cards/' + id,
+        headers: {
+            'X-Workspace': 'flowboard-yassir-area'
+        },
+        params: {
+            password: "1234"
+        },
+        data: {
+            status: status
+        }
+    }
+
+    try {
+        const { data } = await axios.request(options)
+        console.log(data)
+    } catch (error) {
+        console.error(error)
+    }
+}
