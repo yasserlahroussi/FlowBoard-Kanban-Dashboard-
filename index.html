@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </head>
 
 <body>
@@ -26,53 +27,118 @@
                 <p class="text-sm text-gray-500">Suivi des tâches de l'équipe</p>
             </div>
         </div>
-        <button class="btn" id="nouveau-card" onclick="my_modal_1.showModal()">+Nouvelle card</button>
-        <dialog id="my_modal_1" class="modal">
-            <div class="modal-box">
-                <input type="hidden" name="idd">
-                <h3 id="titre-ajout" class="text-lg font-bold">Création d'une nouveau CARD : </h3>
-                <div class="grid">
-                    <label for="title">Title : </label>
-                    <input type="text" id="title_input_ajout" name="title" placeholder="Entre votre title"
-                        class="p-3 rounded-xl">
-                    <span id="alert-title" class="text-xs text-[red] hidden">input invaliiid</span>
-                    <label for="Description">Description : </label>
-                    <input type="text" name="Description" id="description_input_ajout"
-                        placeholder="Entre votre Description " class="p-3 rounded-xl">
-                    <span id="alert-description" class="text-xs text-[red] hidden">input invaliiid</span>
-                    <label for="payment">Priority : &nbsp;</label>
-                    <select name="payment" id="priority_input_ajout" class="p-3 rounded-xl">
-                        <option value="high">high</option>
-                        <option value="medium">medium</option>
-                        <option value="low">low</option>
-                    </select>
-                    <label for="nom">Name : </label>
-                    <select type="text" id="assigne_input_ajout" name="nom" class="p-3 rounded-xl">
-                        <option value="Amina Haddad">Amina Haddad</option>
-                        <option value="Yasmine Benali">Yasmine Benali</option>
-                        <option value="Thomas Leroy">Thomas Leroy</option>
-                        <option value="Lucas Martin">Lucas Martin</option>
-                        <option value="Inès Moreau">Inès Moreau</option>
-                    </select>
-                    <label for="Status">Status : </label>
-                    <select type="text" id="status_input_ajout" name="Status" class="p-3 rounded-xl">
-                        <option value="todo">À faire</option>
-                        <option value="in-progress">In progress</option>
-                        <option value="done">Done</option>
-                    </select>
+        <div>
+            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                    <input type="hidden" name="idd">
+                    <h3 class="text-lg font-bold">MODIFICATION DE CARD : </h3>
+                    <span class="hidden text-xs text-[red]" id="span-remlpir-modification">remplir tout les
+                        champs!!!!!</span>
+                    <div class="grid">
+                        <label for="title">Title : </label>
+                        <input type="text" name="title-modify" placeholder="Entre votre title" class="p-3 rounded-xl">
+                        <span id="alert-title-modify" class="text-xs text-[red] hidden">title invaliiid</span>
+                        <label for="Description">Description : </label>
+                        <input type="text" name="Description-modify" placeholder="Entre votre Description "
+                            class="p-3 rounded-xl">
+                        <span id="alert-description-modify" class="text-xs text-[red] hidden">description
+                            invaliiid</span>
+                        <label for="payment">Priority : &nbsp;</label>
+                        <select name="payment-modify" class="p-3 rounded-xl">
+                            <option value="high">high</option>
+                            <option value="medium">medium</option>
+                            <option value="low">low</option>
+                        </select>
+                        <label for="nom">Name : </label>
+                        <select type="text" name="nom-modify" class="p-3 rounded-xl">
+                            <option value="Amina Haddad">Amina Haddad</option>
+                            <option value="Yasmine Benali">Yasmine Benali</option>
+                            <option value="Thomas Leroy">Thomas Leroy</option>
+                            <option value="Lucas Martin">Lucas Martin</option>
+                            <option value="Inès Moreau">Inès Moreau</option>
+                        </select>
+                        <label for="Status">Status : </label>
+                        <select type="text" name="Status-modify" class="p-3 rounded-xl">
+                            <option value="todo">À faire</option>
+                            <option value="in-progress">In progress</option>
+                            <option value="done">Done</option>
+                        </select>
 
-                </div>
-
-
-                <div class="modal-action">
-                    <form method="dialog">
-                        <button id="btn-submit" class="btn">submit</button>
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
                         <button id="submit-modify" class="btn">modify data</button>
-                        <button class="btn">Close</button>
-                    </form>
+                    </div>
+            </dialog>
+            <button class="btn" id="nouveau-card" onclick="my_modal_1.showModal()">+Nouvelle card</button>
+            <dialog id="my_modal_1" class="modal">
+                <div class="modal-box">
+                    <input type="hidden" name="idd">
+                    <h3 id="titre-ajout" class="text-lg font-bold">Création d'une nouveau CARD : </h3>
+                    <span class="hidden text-xs text-[red]" id="span-remlpir-creation">remplir tout les
+                        champs!!!!!</span>
+                    <div class="grid">
+                        <label for="title">Title : </label>
+                        <input type="text" id="title_input_ajout" name="title" placeholder="Entre votre title"
+                            class="p-3 rounded-xl">
+                        <span id="alert-title" class="text-xs text-[red] hidden">input invaliiid</span>
+                        <label for="Description">Description : </label>
+                        <input type="text" name="Description" id="description_input_ajout"
+                            placeholder="Entre votre Description " class="p-3 rounded-xl">
+                        <span id="alert-description" class="text-xs text-[red] hidden">input invaliiid</span>
+                        <label for="payment">Priority : &nbsp;</label>
+                        <select name="payment" id="priority_input_ajout" class="p-3 rounded-xl">
+                            <option value="high">high</option>
+                            <option value="medium">medium</option>
+                            <option value="low">low</option>
+                        </select>
+                        <label for="nom">Name : </label>
+                        <select type="text" id="assigne_input_ajout" name="nom" class="p-3 rounded-xl">
+                            <option value="Amina Haddad">Amina Haddad</option>
+                            <option value="Yasmine Benali">Yasmine Benali</option>
+                            <option value="Thomas Leroy">Thomas Leroy</option>
+                            <option value="Lucas Martin">Lucas Martin</option>
+                            <option value="Inès Moreau">Inès Moreau</option>
+                        </select>
+                        <label for="Status">Status : </label>
+                        <select type="text" id="status_input_ajout" name="Status" class="p-3 rounded-xl">
+                            <option value="todo">À faire</option>
+                            <option value="in-progress">In progress</option>
+                            <option value="done">Done</option>
+                        </select>
+
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                    <button id="btn-submit" class="btn">submit</button>
                 </div>
-            </div>
-        </dialog>
+            </dialog>
+            <button class="btn" onclick="my_modal_4.showModal()">Génerer les cartes avec IA : </button>
+            <dialog id="my_modal_4" class="modal">
+                <div class="modal-box w-11/12 max-w-5xl">
+                    <h3 class="text-lg font-bold">Génerer votre carte(s)!</h3>
+                    <label for="taches-IA">Title : </label>
+                    <input type="text" id="taches-IA-input" name="taches-IA" placeholder="Entre votre prompt"
+                        class="p-3 rounded-xl">
+                    <span id="alert-title-IA" class="text-xs text-[red] hidden">input invaliiid</span>
+                    <label for="Number-IA">Nombre de cartes : </label>
+                    <input type="number" name="Number-IA" id="Number-IA-input" placeholder="Combien de cartes ??? "
+                        class="p-3 rounded-xl">
+                    <div class="modal-action">
+                        <span id="alert-Number-IA" class="text-xs text-[red] hidden">input invaliiid</span>
+                        <button id="submit-IA" class="btn">Generer</button>
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+        </div>
     </header>
     <div class="flex gap-5 p-6">
         <div class="grid">
@@ -112,15 +178,24 @@
             <button class="btn" id="actualiser">Actualiser</button>
         </div>
     </div>
-    <main id="main" class="grid grid-cols-3">
+    <div id="loading" class="hidden inset-0 z-50 flex items-center justify-center bg-black/40">
+        <span class="loading loading-spinner loading-lg text-white"></span>
+    </div>
+    <main id="main" class="hidden grid grid-cols-3">
         <section class=" flex flex-col m-5 p-6 gap-5 bg-[grey] rounded-xl">
-            <div class="text-[white]">À faire</div>
+            <div class="text-[white] flex justify-between">
+                <div>À faire</div>
+                <div id="count-todo"></div>
+            </div>
             <div id="a-faire">
                 <!-- <div class="flex flex-col gap-5 bg-[white] p-6 rounded-lg"><div><h3 class="font-serif">Filtres combinables</h3><p class="text-[grey] text-xs">Requête avec URLSearchParams à chaque .changement.</p></div><div class="flex justify-between items-centre"><p class="bg-[red] text-[white] p-1 text-xs rounded-sm  font-mono">Haute</p><p class="text-[blue] text-xs font-sans p-1">Omar</p></div></div> -->
             </div>
         </section>
         <section class=" flex flex-col m-5 p-6 gap-5 bg-[grey] rounded-xl">
-            <div class="text-[white]">In progress</div>
+            <div class="text-[white] flex justify-between">
+                <div>In progress</div>
+                <div id="count-progress"></div>
+            </div>
             <div id="in-progre">
                 <!-- <div class="flex flex-col gap-5 bg-[white] p-6 rounded-lg">
                 <div>
@@ -136,7 +211,10 @@
             </div>
         </section>
         <section class=" flex flex-col m-5 p-6 gap-5 bg-[grey] rounded-xl">
-            <div class="text-[white]">Done</div>
+            <div class="text-[white] flex justify-between">
+                <div>Done</div>
+                <div id="count-done"></div>
+            </div>
             <div id="done">
                 <!-- <div class="flex flex-col gap-5 bg-[white] p-6 rounded-lg">
                 <div>
@@ -151,8 +229,10 @@
             </div> -->
             </div>
         </section>
-
     </main>
+    <section id="zero-cartes" class="hidden w-full bg-[grey] rounded-xl p-10 text-white ">
+        PAS DE CARTES VUEILLER GENERER DES CARTE AVEC IA OU BIEN VOUS MEME °°3
+    </section>
 </body>
 
 </html>
