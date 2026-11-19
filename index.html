@@ -26,11 +26,11 @@
                 <p class="text-sm text-gray-500">Suivi des tâches de l'équipe</p>
             </div>
         </div>
-        <button class="btn" onclick="my_modal_1.showModal()">+Nouvelle card</button>
+        <button class="btn" id="nouveau-card" onclick="my_modal_1.showModal()">+Nouvelle card</button>
         <dialog id="my_modal_1" class="modal">
             <div class="modal-box">
                 <input type="hidden" name="idd">
-                <h3 class="text-lg font-bold">Création d'une nouveau CARD : </h3>
+                <h3 id="titre-ajout" class="text-lg font-bold">Création d'une nouveau CARD : </h3>
                 <div class="grid">
                     <label for="title">Title : </label>
                     <input type="text" id="title_input_ajout" name="title" placeholder="Entre votre title"
@@ -62,10 +62,12 @@
                     </select>
 
                 </div>
-                <button id="btn-submit" class="btn hidden">submit</button>
-                <button id="submit-modify" class="btn">modify data</button>
+
+
                 <div class="modal-action">
                     <form method="dialog">
+                        <button id="btn-submit" class="btn">submit</button>
+                        <button id="submit-modify" class="btn">modify data</button>
                         <button class="btn">Close</button>
                     </form>
                 </div>
@@ -149,7 +151,7 @@
             </div> -->
             </div>
         </section>
-        
+
     </main>
 </body>
 

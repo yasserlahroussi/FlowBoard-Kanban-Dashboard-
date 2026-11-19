@@ -1,8 +1,7 @@
-import { get_card, loaddata } from './api.js'
-loaddata(afficher_les_cartes, eror)
+
 
 //1 : ajoute des cartes
-function afficher_les_cartes(CARD,) {
+export function afficher_les_cartes(CARD,) {
     eror_bare.classList = "hidden"
     const a_faire = document.getElementById("a-faire")
     const in_progress = document.getElementById("in-progre")
@@ -35,25 +34,6 @@ function ajoute_selon_status(CARD, i, parent) {
     const description = document.createElement("p")
     description.classList = "text-[grey] text-xs"
     const priority = document.createElement("p")
-    const btn_modifi = document.createElement("button")
-    btn_modifi.textContent="modify"
-    btn_modifi.className="modify"
-     btn_modifi.classList.add("btn")
-     btn_modifi.setAttribute("data-id",CARD[i].id)
-     console.log(CARD)
-     btn_modifi.addEventListener('click',async (e)=>{
-        console.log(e.currentTarget.dataset.id)
-        let {data} = await get_card(e.currentTarget.dataset.id)
-        
-        my_modal_1.showModal()
-        my_modal_1.querySelector('[name="title"]').value=data.title
-        my_modal_1.querySelector('[name="Description"]').value=data.description
-        my_modal_1.querySelector('[name="payment"]').value=data.priority
-        my_modal_1.querySelector('[name="nom"]').value=data.assignee
-        my_modal_1.querySelector('[name="Status"]').value=data.status
-        my_modal_1.querySelector('[name="idd"]').value=data.id
-   
-     })
     priority.textContent = CARD[i].priority
     priority.classList = "bg-[red] text-[white] p-1 text-xs rounded-sm  font-mono"
     if (priority.textContent == "medium") {
@@ -72,8 +52,7 @@ function ajoute_selon_status(CARD, i, parent) {
     name.textContent = CARD[i].assignee
     div1.append(h3, description)
     div2.append(priority, name)
-    div_parent.append(div1, div2,btn_modifi)
-    
+    div_parent.append(div1, div2)
     parent.append(div_parent)
 }
 
@@ -82,111 +61,22 @@ function ajoute_selon_status(CARD, i, parent) {
 //2: affichage d'erreur
 const eror_bare = document.getElementById("erorrr")
 const actualisation = document.getElementById("actualiser")
-function eror() {
+export function eror() {
     eror_bare.classList.remove("hidden")
 }
-actualisation.addEventListener('click', () => {
-    loaddata(afficher_les_cartes, eror)
 
-})
-
-// 3: filtre et recherche :
-
-
-const assigne_delta = document.getElementById("assignee_delta")
-document.getElementById('assignee_delta').addEventListener('change', (e) => {
-    let value_assigne = e.currentTarget.value
-        let value_holder = document.getElementById('recherche').value.trim();
-    const filtre_input = filtre.value
-    console.log(value_assigne)
-    assigne_delta.value
-    loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
-})
+export function actualiser() {
+    actualisation.addEventListener('click', () => {
+        loaddata(afficher_les_cartes, eror)
+    })
+}
 
 
-const filtre = document.getElementById("payment-")
-// const assigne = document.getElementById("assignee")
-document.getElementById('recherche').addEventListener('input', function () {
-    let value_holder = document.getElementById('recherche').value.trim();
-    const filtre_input = filtre.value
-    const value_assigne = assigne_delta.value
-    // const assigne_input = assigne.value
-    loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
-
-})
-
-filtre.addEventListener('change', (e) => {
-    let value_holder = document.getElementById('recherche').value.trim();
-    const filtre_input = e.currentTarget.value
-    const value_assigne = assigne_delta.value
-    // const assigne_input = assigne.value
-    loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
-
-})
 
 
-//4 : creation des cartes
 
-const title_input = document.getElementById("title_input_ajout")
-const description = document.getElementById("description_input_ajout")
-const priority_input = document.getElementById("priority_input_ajout")
-const assigne_ajout = document.getElementById("assigne_input_ajout")
-const status_input = document.getElementById("status_input_ajout")
 
-let check_title
-let check_description
 
-title_input.addEventListener('input', (e) => {
-    const alert_title = document.getElementById("alert-title")
-    let title = e.currentTarget.value
-    check_title = /^[a-zA-ZÀ-ÿ\s'-]+$/.test(title) && title != ""
-    if (!check_title) {
-        alert_title.classList.remove("hidden")
-    } else {
-        alert_title.classList.add("hidden")
-    }
-})
-
-description.addEventListener('input', (e) => {
-    const alert_description = document.getElementById("alert-description")
-    let description = e.currentTarget.value
-    check_description = /^[a-zA-ZÀ-ÿ\s'-]+$/.test(description) && description != ""
-    if (!check_description) {
-        alert_description.classList.remove("hidden")
-    } else {
-        alert_description.classList.add("hidden")
-    }
-
-})
-
-const btn_submit = document.getElementById("btn-submit")
-btn_submit.addEventListener('click', (e) => {
-    console.log(assigne_ajout.value)
-    let objet = {}
-    if (check_description && check_title) {
-        objet = {
-            title: title_input.value,
-            description: description.value,
-            status: status_input.value,
-            priority: priority_input.value,
-            assignee: assigne_ajout.value
-        }
-        console.log(objet)
-        loaddata(data=>{
-            data.push(objet)
-            afficher_les_cartes(data)
-        })
-    }
-   
-})
-const rechercherrr = document.getElementById("recherche")
-const btn_init = document.getElementById("renitialiser")
-btn_init.addEventListener('click',(e)=>{
-    rechercherrr.value =""
-    assigne_delta.value=""
-    filtre.value=""
-    loaddata(afficher_les_cartes, eror, filtre.value, assigne_delta.value, rechercherrr.value)
-})
 
 
 
