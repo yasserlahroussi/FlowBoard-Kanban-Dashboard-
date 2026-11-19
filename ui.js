@@ -1,5 +1,5 @@
 
-
+import { get_card, loaddata } from './api.js'
 //1 : ajoute des cartes
 export function afficher_les_cartes(CARD,) {
     eror_bare.classList = "hidden"
@@ -31,6 +31,29 @@ function ajoute_selon_status(CARD, i, parent) {
     div2.classList = "flex justify-between items-centre"
     const h3 = document.createElement("h3")
     h3.classList = "font-serif"
+    const btn_modifi = document.createElement("button")
+    btn_modifi.textContent = "modify"
+    btn_modifi.className = "modify"
+    btn_modifi.classList.add("btn")
+    const btn_submit = document.getElementById("btn-submit")
+    const btn_modify = document.getElementById("submit-modify")
+    btn_modifi.setAttribute("data-id", CARD[i].id)
+    btn_modifi.addEventListener('click', async (e) => {
+        console.log(e.currentTarget.dataset.id)
+        const btn_submit = document.getElementById("btn-submit")
+        const titre_ajout = document.getElementById("titre-ajout")
+        titre_ajout.textContent = "MODIFICATION DE CARD  : "
+        btn_submit.classList.add("hidden")
+        btn_modify.classList.remove("hidden")
+        let { data } = await get_card(e.currentTarget.dataset.id)
+        my_modal_1.showModal()
+        my_modal_1.querySelector('[name="title"]').value = data.title
+        my_modal_1.querySelector('[name="Description"]').value = data.description
+        my_modal_1.querySelector('[name="payment"]').value = data.priority
+        my_modal_1.querySelector('[name="nom"]').value = data.assignee
+        my_modal_1.querySelector('[name="Status"]').value = data.status
+        my_modal_1.querySelector('[name="idd"]').value = data.id
+    })
     const description = document.createElement("p")
     description.classList = "text-[grey] text-xs"
     const priority = document.createElement("p")
@@ -52,7 +75,7 @@ function ajoute_selon_status(CARD, i, parent) {
     name.textContent = CARD[i].assignee
     div1.append(h3, description)
     div2.append(priority, name)
-    div_parent.append(div1, div2)
+    div_parent.append(div1, div2, btn_modifi)
     parent.append(div_parent)
 }
 
@@ -64,7 +87,47 @@ const actualisation = document.getElementById("actualiser")
 export function eror() {
     eror_bare.classList.remove("hidden")
 }
+export function filtre() {
+    const assigne_delta = document.getElementById("assignee_delta")
+    document.getElementById('assignee_delta').addEventListener('change', (e) => {
+        let value_assigne = e.currentTarget.value
+        let value_holder = document.getElementById('recherche').value.trim();
+        const filtre_input = filtre.value
+        console.log(value_assigne)
+        assigne_delta.value
+        loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
+    })
 
+
+    const filtre = document.getElementById("payment-")
+    // const assigne = document.getElementById("assignee")
+    document.getElementById('recherche').addEventListener('input', function () {
+        let value_holder = document.getElementById('recherche').value.trim();
+        const filtre_input = filtre.value
+        const value_assigne = assigne_delta.value
+        // const assigne_input = assigne.value
+        loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
+
+    })
+
+    filtre.addEventListener('change', (e) => {
+        let value_holder = document.getElementById('recherche').value.trim();
+        const filtre_input = e.currentTarget.value
+        const value_assigne = assigne_delta.value
+        // const assigne_input = assigne.value
+        loaddata(afficher_les_cartes, eror, filtre_input, value_assigne, value_holder)
+
+    })
+    const rechercherrr = document.getElementById("recherche")
+    const btn_init = document.getElementById("renitialiser")
+    btn_init.addEventListener('click', (e) => {
+        rechercherrr.value = ""
+        assigne_delta.value = ""
+        filtre.value = ""
+        loaddata(afficher_les_cartes, eror, filtre.value, assigne_delta.value, rechercherrr.value)
+    })
+
+}
 export function actualiser() {
     actualisation.addEventListener('click', () => {
         loaddata(afficher_les_cartes, eror)

@@ -24,3 +24,34 @@ export async function loaddata(affiche, eror, priority = "", assignee = "", sear
     }
 
 }
+export async function get_card(id) {
+    return await axios.get('https://flowboard-api-virid.vercel.app/cards/' + id, {
+        headers: {
+            'X-Workspace': 'flowboard-yassir-area'
+        },
+        password: "1234"
+
+    })
+
+}
+export async function modify_card(id, data) {
+    const options = {
+        method: 'PUT',
+        url: 'https://flowboard-api-virid.vercel.app/cards/' + id,
+        headers: {
+            'X-Workspace': 'flowboard-yassir-area'
+
+        },
+        params: {
+            password: "1234"
+        },
+        data: data
+    }
+
+    try {
+        const { data } = await axios.request(options)
+        console.log(data)
+    } catch (error) {
+        console.error(error)
+    }
+}
