@@ -22,7 +22,9 @@ export function afficher_les_cartes(CARD,) {
         }
     }
 }
-
+const assigne_delta = document.getElementById("assignee_delta")
+const filtree = document.getElementById("payment-")
+const rech = document.getElementById("recherche")
 function ajoute_selon_status(CARD, i, parent) {
     const div_parent = document.createElement("div")
     div_parent.classList = "flex flex-col gap-5  bg-[white] p-6 mb-10 rounded-lg"
@@ -38,7 +40,7 @@ function ajoute_selon_status(CARD, i, parent) {
     btn_delete.addEventListener('click', async (e) => {
         let id_delete = e.currentTarget.dataset.delete
         await deletee(id_delete)
-        loaddata(afficher_les_cartes, eror)
+        loaddata(afficher_les_cartes, eror, filtree.value, assigne_delta.value, rech.value)
     })
     const btn_modifi = document.createElement("button")
     btn_modifi.textContent = "modify"
@@ -52,19 +54,20 @@ function ajoute_selon_status(CARD, i, parent) {
     btn_l_progress.textContent = "→"
     btn_l_progress.addEventListener('click', async (e) => {
         await change_status("in-progress", e.currentTarget.dataset.status)
-        loaddata(afficher_les_cartes, eror)
+        loaddata(afficher_les_cartes, eror, filtree.value, assigne_delta.value, rech.value)
+        console.log(rech.value)
     })
     btn_r_progress.addEventListener('click', async (e) => {
         await change_status("in-progress", e.currentTarget.dataset.status)
-        loaddata(afficher_les_cartes, eror)
+        loaddata(afficher_les_cartes, eror, filtree.value, assigne_delta.value, rech.value)
     })
     btn_r_todo.addEventListener('click', async (e) => {
         await change_status("todo", e.currentTarget.dataset.status)
-        loaddata(afficher_les_cartes, eror)
+        loaddata(afficher_les_cartes, eror, filtree.value, assigne_delta.value, rech.value)
     })
     btn_l_done.addEventListener('click', async (e) => {
         await change_status("done", e.currentTarget.dataset.status)
-        loaddata(afficher_les_cartes, eror)
+        loaddata(afficher_les_cartes, eror, filtree.value, assigne_delta.value, rech.value)
     })
     btn_l_progress.setAttribute("data-status", CARD[i].id)
     btn_r_progress.setAttribute("data-status", CARD[i].id)
@@ -138,7 +141,7 @@ function ajoute_selon_status(CARD, i, parent) {
     name.textContent = CARD[i].assignee
     div1.append(h3, description)
     div2.append(priority, name)
-    div_parent.append(div1, div2, btn_modifi,btn_delete, div_status)
+    div_parent.append(div1, div2, btn_modifi, btn_delete, div_status)
     parent.append(div_parent)
 }
 
