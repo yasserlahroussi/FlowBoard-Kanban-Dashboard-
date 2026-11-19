@@ -1,6 +1,10 @@
 import { loaddata, modify_card, deletee, ajout_card } from './api.js'
 import { afficher_les_cartes, eror, actualiser, filtre } from './ui.js'
+
 const btn_modify = document.getElementById("submit-modify")
+const assigne_delta = document.getElementById("assignee_delta")
+const filtree = document.getElementById("payment-")
+const rech = document.getElementById("recherche")
 btn_modify.addEventListener('click', async (e) => {
     let data = {
         id: my_modal_1.querySelector('[name="idd"]').value,
@@ -12,7 +16,7 @@ btn_modify.addEventListener('click', async (e) => {
     }
     console.log(data.id)
     await modify_card(data.id, data)
-    loaddata(afficher_les_cartes, eror)
+     loaddata(afficher_les_cartes, eror, filtree.value, assigne_delta.value, rech.value)
 })
 loaddata(afficher_les_cartes, eror)
 actualiser()
@@ -54,8 +58,8 @@ const btn_submit = document.getElementById("btn-submit")
 btn_submit.addEventListener('click', async (e) => {
     console.log(assigne_ajout.value)
     let objet = {}
-    if (check_description && 
-        check_title && 
+    if (check_description &&
+        check_title &&
         my_modal_1.querySelector('[name="payment"]').value != "" &&
         my_modal_1.querySelector('[name="nom"]').value != "" &&
         my_modal_1.querySelector('[name="Status"]').value != "") {
@@ -69,7 +73,7 @@ btn_submit.addEventListener('click', async (e) => {
         }
         console.log(objet)
         await ajout_card(objet)
-        loaddata(afficher_les_cartes, eror)
+        loaddata(afficher_les_cartes, eror, filtree.value, assigne_delta.value, rech.value)
     }
 
 })
