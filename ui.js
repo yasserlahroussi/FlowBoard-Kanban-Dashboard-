@@ -1,5 +1,5 @@
 
-import { get_card, loaddata } from './api.js'
+import { get_card, loaddata,change_status } from './api.js'
 //1 : ajoute des cartes
 export function afficher_les_cartes(CARD,) {
     eror_bare.classList = "hidden"
@@ -35,6 +35,60 @@ function ajoute_selon_status(CARD, i, parent) {
     btn_modifi.textContent = "modify"
     btn_modifi.className = "modify"
     btn_modifi.classList.add("btn")
+    const div_status = document.createElement("div")
+    const btn_r_progress = document.createElement("button")
+    const btn_l_done = document.createElement("button")
+    const btn_r_todo = document.createElement("button")
+    const btn_l_progress = document.createElement("button")
+    btn_l_progress.textContent = "→"
+    btn_l_progress.addEventListener('click', async (e) => {
+        await change_status("in-progress", e.currentTarget.dataset.status)
+        loaddata(afficher_les_cartes, eror)
+    })
+    btn_r_progress.addEventListener('click', async (e) => {
+        await change_status("in-progress", e.currentTarget.dataset.status)
+        loaddata(afficher_les_cartes, eror)
+    })
+    btn_r_todo.addEventListener('click', async (e) => {
+        await change_status("todo", e.currentTarget.dataset.status)
+        loaddata(afficher_les_cartes, eror)
+    })
+    btn_l_done.addEventListener('click', async (e) => {
+        await change_status("done", e.currentTarget.dataset.status)
+        loaddata(afficher_les_cartes, eror)
+    })
+    btn_l_progress.setAttribute("data-status", CARD[i].id)
+    btn_r_progress.setAttribute("data-status", CARD[i].id)
+    btn_l_done.setAttribute("data-status", CARD[i].id)
+    btn_r_todo.setAttribute("data-status", CARD[i].id)
+    btn_r_todo.textContent = "←"
+    btn_l_done.textContent = "→"
+    btn_r_progress.textContent = "←"
+    btn_l_progress.classList = "btn w-full"
+    btn_l_done.classList = "btn w-full"
+    btn_r_progress.classList = "btn w-full"
+    btn_r_todo.classList = "btn w-full"
+    div_status.append(btn_l_progress, btn_r_todo, btn_l_done, btn_r_progress)
+    div_status.classList = "flex flex-col"
+    if (CARD[i].status == "todo") {
+        btn_l_progress.classList.remove("hidden")
+        btn_l_done.classList.add("hidden")
+        btn_r_progress.classList.add("hidden")
+        btn_r_todo.classList.add("hidden")
+        console.log(CARD[i].status)
+    } else if (CARD[i].status == "in-progress") {
+        btn_r_todo.classList.remove("hidden")
+        btn_l_done.classList.remove("hidden")
+        btn_l_progress.classList.add("hidden")
+        btn_r_progress.classList.add("hidden")
+        console.log(CARD[i].status)
+    } else {
+        btn_r_progress.classList.remove("hidden")
+        btn_l_done.classList.add("hidden")
+        btn_l_progress.classList.add("hidden")
+        btn_r_todo.classList.add("hidden")
+        console.log(CARD[i].status)
+    }
     const btn_submit = document.getElementById("btn-submit")
     const btn_modify = document.getElementById("submit-modify")
     btn_modifi.setAttribute("data-id", CARD[i].id)
@@ -75,7 +129,7 @@ function ajoute_selon_status(CARD, i, parent) {
     name.textContent = CARD[i].assignee
     div1.append(h3, description)
     div2.append(priority, name)
-    div_parent.append(div1, div2, btn_modifi)
+    div_parent.append(div1, div2, btn_modifi,div_status)
     parent.append(div_parent)
 }
 
