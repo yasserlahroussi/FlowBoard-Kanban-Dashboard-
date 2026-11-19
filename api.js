@@ -95,3 +95,23 @@ export async function deletee(id) {
         console.error(error)
     }
 }
+export async function ajout_card(data) {
+    const options = {
+        method: 'POST',
+        url: 'https://flowboard-api-virid.vercel.app/cards',
+        headers: {
+            'X-Workspace': 'flowboard-yassir-area'
+        },
+        params: {
+            password: "1234"
+        },
+        data: data
+    }
+
+    try {
+        const { data } = await axios.request(options)
+        console.log(data)
+    } catch (error) {
+        console.error(error)
+    }
+}
