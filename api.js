@@ -77,3 +77,21 @@ export async function change_status(status, id) {
         console.error(error)
     }
 }
+export async function deletee(id) {
+    const options = {
+        method: 'DELETE',
+        url: 'https://flowboard-api-virid.vercel.app/cards/' + id,
+        headers: {
+            'X-Workspace': 'flowboard-yassir-area'
+        },
+        params: {
+            password: "1234"
+        }
+    }
+    try {
+        const { data } = await axios.request(options)
+        console.log(data)
+    } catch (error) {
+        console.error(error)
+    }
+}

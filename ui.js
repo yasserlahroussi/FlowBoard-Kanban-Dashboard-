@@ -1,5 +1,5 @@
 
-import { get_card, loaddata,change_status } from './api.js'
+import { get_card, loaddata, change_status, deletee } from './api.js'
 //1 : ajoute des cartes
 export function afficher_les_cartes(CARD,) {
     eror_bare.classList = "hidden"
@@ -31,6 +31,15 @@ function ajoute_selon_status(CARD, i, parent) {
     div2.classList = "flex justify-between items-centre"
     const h3 = document.createElement("h3")
     h3.classList = "font-serif"
+    const btn_delete = document.createElement("button")
+    btn_delete.textContent = "Supprimer"
+    btn_delete.classList = "btn bg-[red] text-white"
+    btn_delete.setAttribute("data-delete", CARD[i].id)
+    btn_delete.addEventListener('click', async (e) => {
+        let id_delete = e.currentTarget.dataset.delete
+        await deletee(id_delete)
+        loaddata(afficher_les_cartes, eror)
+    })
     const btn_modifi = document.createElement("button")
     btn_modifi.textContent = "modify"
     btn_modifi.className = "modify"
@@ -129,7 +138,7 @@ function ajoute_selon_status(CARD, i, parent) {
     name.textContent = CARD[i].assignee
     div1.append(h3, description)
     div2.append(priority, name)
-    div_parent.append(div1, div2, btn_modifi,div_status)
+    div_parent.append(div1, div2, btn_modifi,btn_delete, div_status)
     parent.append(div_parent)
 }
 

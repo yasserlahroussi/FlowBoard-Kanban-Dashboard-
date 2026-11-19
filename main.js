@@ -1,4 +1,4 @@
-import { loaddata,modify_card,change_status } from './api.js'
+import { loaddata,modify_card,deletee } from './api.js'
 import { afficher_les_cartes, eror, actualiser, filtre } from './ui.js'
 const btn_modify = document.getElementById("submit-modify")
 btn_modify.addEventListener('click', async (e) => {
