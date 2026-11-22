@@ -43,7 +43,6 @@ btn_modify.addEventListener('click', async (e) => {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -175,7 +174,6 @@ btn_submit.addEventListener('click', async (e) => {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -209,6 +207,7 @@ const alert_tit = document.getElementById("alert-title-IA")
 let check_IA_title
 let check_IA_Num
 const tache_name = document.getElementById("taches-IA-input")
+const cle = document.getElementById("cle-IA-input")
 const btn_IA = document.getElementById("submit-IA")
 number_taches.addEventListener("input", (e) => {
     check_IA_Num = /^\d/.test(number_taches.value) && number_taches.value != "" && number_taches.value < 11
@@ -234,11 +233,10 @@ btn_IA.addEventListener("click", async (e) => {
         let num = Number(number_taches.value)
         showLoading()
         try {
-            await generer(tache_name.value, num)
+            await generer(tache_name.value, num,cle.value)
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
