@@ -1,4 +1,3 @@
-import {apikey} from './apikey.js'
 const url = 'https://flowboard-api-virid.vercel.app/cards'
 export async function loaddata(priority = "", assignee = "", search = "") {
     let parametre = {}
@@ -83,7 +82,7 @@ export async function ajout_card(data) {
         }
     )
 }
-export async function generer(description, count) {
+export async function generer(description, count,apikey) {
     await axios.post('https://flowboard-api-virid.vercel.app/ai/cards',
         {
             description: description,

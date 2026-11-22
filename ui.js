@@ -69,7 +69,7 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
+    
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -95,7 +95,7 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
+            
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -110,7 +110,7 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
+            
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -125,7 +125,6 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -139,7 +138,6 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            eror(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -193,7 +191,6 @@ function ajoute_selon_status(CARD, i, parent) {
             my_modal_5.querySelector('[name="Status-modify"]').value = data.status
             my_modal_5.querySelector('[name="idd"]').value = data.id
         } catch (error) {
-            eror(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
