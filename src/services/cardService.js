@@ -26,9 +26,7 @@ export async function get_card(id) {
             'X-Workspace': 'flowboard-yassir-area'
         },
         password: "1234"
-
-    }
-    )
+    })
 }
 export async function modify_card(id, data) {
     await axios.put(url + '/' + id,
@@ -80,21 +78,5 @@ export async function ajout_card(data) {
                 password: "1234"
             }
         }
-    )
-}
-export async function generer(description, count,apikey) {
-    await axios.post('https://flowboard-api-virid.vercel.app/ai/cards',
-        {
-            description: description,
-            apiKey: apikey,
-            count: count
-        }, {
-        headers: {
-            'X-Workspace': 'flowboard-yassir-area'
-        },
-        params: {
-            password: "1234"
-        }
-    }
     )
 }
