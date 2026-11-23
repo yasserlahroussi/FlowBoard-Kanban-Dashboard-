@@ -1,5 +1,100 @@
-import { loaddata, modify_card, ajout_card, generer } from './api.js'
-import { afficher_les_cartes, eror, actualiser, filtre,showLoading,hideLoading } from './ui.js'
+import { loaddata, modify_card, ajout_card } from './services/cardService.js'
+import { generer } from './services/aiService.js'
+import { afficher_les_cartes, eror } from './ui/boared.js'
+import { showLoading, hideLoading } from './ui/notifications.js'
+
+const actualisation = document.getElementById("actualiser")
+function actualiser() {
+    actualisation.addEventListener('click', async () => {
+        showLoading()
+        try {
+            let objet = await loaddata("", "", "")
+            afficher_les_cartes(objet)
+        } catch (error) {
+            eror()
+        } finally {
+            hideLoading()
+        }
+    })
+}
+
+function filtre() {
+    const assigne_delta = document.getElementById("assignee_delta")
+    assigne_delta.value = localStorage.getItem("assigne")
+    document.getElementById('assignee_delta').addEventListener('change', async (e) => {
+        let value_assigne = e.currentTarget.value
+        localStorage.setItem("assigne", value_assigne)
+        let value_holder = document.getElementById('recherche').value.trim();
+        const filtre_input = filtre.value
+        showLoading()
+        try {
+            let objet = await loaddata(filtre_input, value_assigne, value_holder)
+            afficher_les_cartes(objet)
+        } catch (error) {
+            eror()
+        } finally {
+            hideLoading()
+        }
+
+    })
+
+
+    const filtre = document.getElementById("payment-")
+    document.getElementById('recherche').addEventListener('input', async function () {
+        let value_holder = document.getElementById('recherche').value.trim();
+        const filtre_input = filtre.value
+        localStorage.setItem("recherche", value_holder)
+        const value_assigne = assigne_delta.value
+        showLoading()
+        try {
+            let objet = await loaddata(filtre_input, value_assigne, value_holder)
+            afficher_les_cartes(objet)
+        } catch (error) {
+            eror()
+        } finally {
+            hideLoading()
+        }
+
+    })
+
+    filtre.addEventListener('change', async (e) => {
+        let value_holder = document.getElementById('recherche').value.trim();
+        const filtre_input = e.currentTarget.value
+        const value_assigne = assigne_delta.value
+        localStorage.setItem("propertyy", filtre_input)
+        showLoading()
+        try {
+            let objet = await loaddata(filtre_input, value_assigne, value_holder)
+            afficher_les_cartes(objet)
+        } catch (error) {
+            eror()
+        } finally {
+            hideLoading()
+        }
+
+    })
+    const rechercherrr = document.getElementById("recherche")
+    const btn_init = document.getElementById("renitialiser")
+    btn_init.addEventListener('click', async (e) => {
+        rechercherrr.value = ""
+        assigne_delta.value = ""
+        filtre.value = ""
+        localStorage.setItem("propertyy", "")
+        localStorage.setItem("recherche", "")
+        localStorage.setItem("assigne", "")
+        showLoading()
+        try {
+            let objet = await loaddata(filtre.value, assigne_delta.value, rechercherrr.value)
+            afficher_les_cartes(objet)
+        } catch (error) {
+            eror()
+        } finally {
+            hideLoading()
+        }
+    })
+
+}
+
 const btn_modify = document.getElementById("submit-modify")
 const assigne_delta = document.getElementById("assignee_delta")
 const filtree = document.getElementById("payment-")

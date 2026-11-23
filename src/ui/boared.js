@@ -1,5 +1,6 @@
+import { get_card, loaddata, change_status, deletee } from '../services/cardService.js'
+import { showLoading, hideLoading } from './notifications.js'
 
-import { get_card, loaddata, change_status, deletee } from './api.js'
 //1 : ajoute des cartes
 export function afficher_les_cartes(CARD,) {
     eror_bare.classList = "hidden"
@@ -69,7 +70,7 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-    
+
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -95,7 +96,7 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            
+
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -110,7 +111,7 @@ function ajoute_selon_status(CARD, i, parent) {
             let objet = await loaddata(filtree.value, assigne_delta.value, rech.value)
             afficher_les_cartes(objet)
         } catch (error) {
-            
+
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -224,7 +225,6 @@ function ajoute_selon_status(CARD, i, parent) {
 }
 //2: affichage d'erreur
 const eror_bare = document.getElementById("erorrr")
-const actualisation = document.getElementById("actualiser")
 const main = document.getElementById("main")
 export function eror() {
     eror_bare.classList.remove("hidden")
@@ -232,114 +232,3 @@ export function eror() {
 }
 
 assigne_delta.value = localStorage.getItem("assigne")
-export function filtre() {
-    const assigne_delta = document.getElementById("assignee_delta")
-    assigne_delta.value = localStorage.getItem("assigne")
-    document.getElementById('assignee_delta').addEventListener('change', async (e) => {
-        let value_assigne = e.currentTarget.value
-        localStorage.setItem("assigne", value_assigne)
-        let value_holder = document.getElementById('recherche').value.trim();
-        const filtre_input = filtre.value
-        showLoading()
-        try {
-            let objet = await loaddata(filtre_input, value_assigne, value_holder)
-            afficher_les_cartes(objet)
-        } catch (error) {
-            eror()
-        } finally {
-            hideLoading()
-        }
-
-    })
-
-
-    const filtre = document.getElementById("payment-")
-    document.getElementById('recherche').addEventListener('input', async function () {
-        let value_holder = document.getElementById('recherche').value.trim();
-        const filtre_input = filtre.value
-        localStorage.setItem("recherche", value_holder)
-        const value_assigne = assigne_delta.value
-        showLoading()
-        try {
-            let objet = await loaddata(filtre_input, value_assigne, value_holder)
-            afficher_les_cartes(objet)
-        } catch (error) {
-            eror()
-        } finally {
-            hideLoading()
-        }
-
-    })
-
-    filtre.addEventListener('change', async (e) => {
-        let value_holder = document.getElementById('recherche').value.trim();
-        const filtre_input = e.currentTarget.value
-        const value_assigne = assigne_delta.value
-        localStorage.setItem("propertyy", filtre_input)
-        showLoading()
-        try {
-            let objet = await loaddata(filtre_input, value_assigne, value_holder)
-            afficher_les_cartes(objet)
-        } catch (error) {
-            eror()
-        } finally {
-            hideLoading()
-        }
-
-    })
-    const rechercherrr = document.getElementById("recherche")
-    const btn_init = document.getElementById("renitialiser")
-    btn_init.addEventListener('click', async (e) => {
-        rechercherrr.value = ""
-        assigne_delta.value = ""
-        filtre.value = ""
-        localStorage.setItem("propertyy", "")
-        localStorage.setItem("recherche", "")
-        localStorage.setItem("assigne", "")
-        showLoading()
-        try {
-            let objet = await loaddata(filtre.value, assigne_delta.value, rechercherrr.value)
-            afficher_les_cartes(objet)
-        } catch (error) {
-            eror()
-        } finally {
-            hideLoading()
-        }
-    })
-
-}
-export function showLoading() {
-    document.getElementById("loading").classList.remove("hidden")
-    document.getElementById("main").classList.add("hidden")
-    document.getElementById("zero-cartes").classList.add("hidden")
-    eror_bare.classList = "hidden"
-}
-export function hideLoading() {
-    document.getElementById("loading").classList.add("hidden")
-
-}
-export function actualiser() {
-    actualisation.addEventListener('click', async () => {
-        showLoading()
-        try {
-            let objet = await loaddata("", "", "")
-            afficher_les_cartes(objet)
-        } catch (error) {
-            eror()
-        } finally {
-            hideLoading()
-        }
-    })
-}
-
-
-
-
-
-
-
-
-
-
-
-
