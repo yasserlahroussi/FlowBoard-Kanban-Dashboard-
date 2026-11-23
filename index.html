@@ -27,52 +27,74 @@
             </div>
         </div>
         <button class="btn" id="nouveau-card" onclick="my_modal_1.showModal()">+Nouvelle card</button>
-        <dialog id="my_modal_1" class="modal">
-            <div class="modal-box">
-                <input type="hidden" name="idd">
-                <h3 id="titre-ajout" class="text-lg font-bold">Création d'une nouveau CARD : </h3>
-                <div class="grid">
-                    <label for="title">Title : </label>
-                    <input type="text" id="title_input_ajout" name="title" placeholder="Entre votre title"
+        <div>
+            <dialog id="my_modal_1" class="modal">
+                <div class="modal-box">
+                    <input type="hidden" name="idd">
+                    <h3 id="titre-ajout" class="text-lg font-bold">Création d'une nouveau CARD : </h3>
+                    <div class="grid">
+                        <label for="title">Title : </label>
+                        <input type="text" id="title_input_ajout" name="title" placeholder="Entre votre title"
+                            class="p-3 rounded-xl">
+                        <span id="alert-title" class="text-xs text-[red] hidden">input invaliiid</span>
+                        <label for="Description">Description : </label>
+                        <input type="text" name="Description" id="description_input_ajout"
+                            placeholder="Entre votre Description " class="p-3 rounded-xl">
+                        <span id="alert-description" class="text-xs text-[red] hidden">input invaliiid</span>
+                        <label for="payment">Priority : &nbsp;</label>
+                        <select name="payment" id="priority_input_ajout" class="p-3 rounded-xl">
+                            <option value="high">high</option>
+                            <option value="medium">medium</option>
+                            <option value="low">low</option>
+                        </select>
+                        <label for="nom">Name : </label>
+                        <select type="text" id="assigne_input_ajout" name="nom" class="p-3 rounded-xl">
+                            <option value="Amina Haddad">Amina Haddad</option>
+                            <option value="Yasmine Benali">Yasmine Benali</option>
+                            <option value="Thomas Leroy">Thomas Leroy</option>
+                            <option value="Lucas Martin">Lucas Martin</option>
+                            <option value="Inès Moreau">Inès Moreau</option>
+                        </select>
+                        <label for="Status">Status : </label>
+                        <select type="text" id="status_input_ajout" name="Status" class="p-3 rounded-xl">
+                            <option value="todo">À faire</option>
+                            <option value="in-progress">In progress</option>
+                            <option value="done">Done</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                    <button id="btn-submit" class="btn">submit</button>
+                    <button id="submit-modify" class="btn">modify data</button>
+                </div>
+            </dialog>
+            <button class="btn" onclick="my_modal_4.showModal()">Génerer les cartes avec IA : </button>
+            <dialog id="my_modal_4" class="modal">
+                <div class="modal-box w-11/12 max-w-5xl">
+                    <h3 class="text-lg font-bold">Génerer votre carte(s)!</h3>
+                    <label for="taches-IA">Title : </label>
+                    <input type="text" id="taches-IA-input" name="taches-IA" placeholder="Entre votre title"
                         class="p-3 rounded-xl">
-                    <span id="alert-title" class="text-xs text-[red] hidden">input invaliiid</span>
-                    <label for="Description">Description : </label>
-                    <input type="text" name="Description" id="description_input_ajout"
-                        placeholder="Entre votre Description " class="p-3 rounded-xl">
-                    <span id="alert-description" class="text-xs text-[red] hidden">input invaliiid</span>
-                    <label for="payment">Priority : &nbsp;</label>
-                    <select name="payment" id="priority_input_ajout" class="p-3 rounded-xl">
-                        <option value="high">high</option>
-                        <option value="medium">medium</option>
-                        <option value="low">low</option>
-                    </select>
-                    <label for="nom">Name : </label>
-                    <select type="text" id="assigne_input_ajout" name="nom" class="p-3 rounded-xl">
-                        <option value="Amina Haddad">Amina Haddad</option>
-                        <option value="Yasmine Benali">Yasmine Benali</option>
-                        <option value="Thomas Leroy">Thomas Leroy</option>
-                        <option value="Lucas Martin">Lucas Martin</option>
-                        <option value="Inès Moreau">Inès Moreau</option>
-                    </select>
-                    <label for="Status">Status : </label>
-                    <select type="text" id="status_input_ajout" name="Status" class="p-3 rounded-xl">
-                        <option value="todo">À faire</option>
-                        <option value="in-progress">In progress</option>
-                        <option value="done">Done</option>
-                    </select>
-
+                    <span id="alert-title-IA" class="text-xs text-[red] hidden">input invaliiid</span>
+                    <label for="Number-IA">Nombre de cartes : </label>
+                    <input type="number" name="Number-IA" id="Number-IA-input" placeholder="Entre votre Description "
+                        class="p-3 rounded-xl">
+                    <div class="modal-action">
+                        <span id="alert-Number-IA" class="text-xs text-[red] hidden">input invaliiid</span>
+                        <button id="submit-IA" class="btn">Generer</button>
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
                 </div>
-
-
-                <div class="modal-action">
-                    <form method="dialog">
-                        <button id="btn-submit" class="btn">submit</button>
-                        <button id="submit-modify" class="btn">modify data</button>
-                        <button class="btn">Close</button>
-                    </form>
-                </div>
-            </div>
-        </dialog>
+            </dialog>
+        </div>
     </header>
     <div class="flex gap-5 p-6">
         <div class="grid">

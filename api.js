@@ -115,3 +115,28 @@ export async function ajout_card(data) {
         console.error(error)
     }
 }
+
+export async function generer(description, count) {
+    const options = {
+        method: 'POST',
+        url: 'https://flowboard-api-virid.vercel.app/ai/cards',
+        headers: {
+            'X-Workspace': 'flowboard-yassir-area'
+        },
+        params: {
+            password: "1234"
+        },
+        data: {
+            description: description,
+            apiKey: '',
+            count: count
+        }
+    }
+
+    try {
+        const { data } = await axios.request(options)
+        console.log(data)
+    } catch (error) {
+        console.error(error)
+    }
+}
